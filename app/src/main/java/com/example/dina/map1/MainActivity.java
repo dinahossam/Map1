@@ -25,6 +25,7 @@ import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+    IALocationManager mLocationManager;
 
     // define the display assembly compass picture
     private ImageView image;
@@ -39,6 +40,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private int n =0;
 
+    private static double longitute = 0.0;
+    private static double latitute = 0.0;
+
+    private static double init_longitute = -1;
+    private static double init_latitute = -1;
+
+    private com.firebase.client.DataSnapshot point;
+
+    private String dest;
+
     final ArrayList<com.firebase.client.DataSnapshot> points =  new ArrayList<com.firebase.client.DataSnapshot>();
     final ArrayList<com.firebase.client.DataSnapshot> sp =  new ArrayList<com.firebase.client.DataSnapshot>();
 
@@ -46,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mLocationManager = IALocationManager.create(this);
 
         // our compass image
         image = (ImageView) findViewById(R.id.imageViewCompass);
@@ -55,12 +68,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         Intent intent = getIntent();
         tvHeading.setText("Dest: " +  intent.getStringExtra("dest"));
+        dest = intent.getStringExtra("dest");
+
+       // double dest_id=(double)points.
+
 
         // initialize your android device sensor capabilities
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         //   Firebase.setandroid
         Firebase.setAndroidContext(this);
         Firebase ref = new Firebase("https://map1-ab0da.firebaseio.com/points");
+
+       // com.firebase.client.DataSnapshot check = ref.child("points").
 
         ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -74,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 sp.add(points.get(33));
                 sp.add(points.get(2));
                 if(points.size()==111){
-                    com.firebase.client.DataSnapshot point= findSrc(31.20722670, 29.92458723);
+                    point = findSrc(init_longitute, init_latitute);
                     System.out.println("Nearest point" + point.child("id").getValue());
                     System.out.println(countPoints());
                 }
@@ -90,7 +109,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+    IALocationListener mLocationListener = new IALocationListener() {
+        @Override
+        public void onLocationChanged(IALocation iaLocation) {
+            //TextView txtLoc = (TextView) findViewById(R.id.myTextView);
+            //txtLoc.setText(String.valueOf(iaLocation.getLatitude() + " ," + iaLocation.getLongitude()));
+            longitute = iaLocation.getLongitude();
+            latitute = iaLocation.getLatitude();
 
+            if ((init_latitute == -1) && (init_longitute == -1)){
+                init_latitute = latitute;
+                init_longitute = longitute;
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+    };
 
     @Override
     protected void onResume() {
