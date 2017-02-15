@@ -1,5 +1,6 @@
 package com.example.dina.map1;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         // TextView that will tell the user what degree is he heading
         tvHeading = (TextView) findViewById(R.id.tvHeading);
+
+        Intent intent = getIntent();
+        tvHeading.setText("Dest: " +  intent.getStringExtra("dest"));
 
         // initialize your android device sensor capabilities
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -106,7 +110,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // get the angle around the z-axis rotated
         float degree = Math.round(event.values[0]);
 
-        tvHeading.setText("Heading: " + Float.toString(degree) + " degrees");
+        //tvHeading.setText("Heading: " + Float.toString(degree) + " degrees");
+       // Intent intent = getIntent();
+        //tvHeading.setText("Dest: " +  intent.getStringExtra("dest"));
+
 
         // create a rotation animation (reverse turn degree degrees)
         RotateAnimation ra = new RotateAnimation(
