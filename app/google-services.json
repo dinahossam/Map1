@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "177901523935",
+    "firebase_url": "https://map1-ab0da.firebaseio.com",
+    "project_id": "map1-ab0da",
+    "storage_bucket": "map1-ab0da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177901523935:android:22afce0d096e7c21",
+        "android_client_info": {
+          "package_name": "com.example.dina.map1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177901523935-qhs6ns682tl84tii6jfn1kk5o2jt15ct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgElQ5Tm_e83OZ9VDTC5u9kF8Fg8D_168"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177901523935-qhs6ns682tl84tii6jfn1kk5o2jt15ct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
