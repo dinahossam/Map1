@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     final ArrayList<com.firebase.client.DataSnapshot> points =  new ArrayList<com.firebase.client.DataSnapshot>();
     final ArrayList<com.firebase.client.DataSnapshot> sp =  new ArrayList<com.firebase.client.DataSnapshot>();
+    final  com.firebase.client.DataSnapshot[][] adj = new com.firebase.client.DataSnapshot [100][9];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,46 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //   Firebase.setandroid
         Firebase.setAndroidContext(this);
         Firebase ref = new Firebase("https://map1-ab0da.firebaseio.com/points");
+        Firebase ref1 = new Firebase("https://map1-ab0da.firebaseio.com/adjecent matrix");
+
+        ref1.addValueEventListener(new com.firebase.client.ValueEventListener(){
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (com.firebase.client.DataSnapshot data: dataSnapshot.getChildren()) {
+                    System.out.println("alaaaaaaa" + data.getKey());
+//                    int key = Integer.valueOf(data.getKey());
+//                    //adj[key][0]=(com.firebase.client.DataSnapshot)data.getKey();
+//                    System.out.println("alaaaaaaa" + data.getKey());
+//                    adj[key][1]=(com.firebase.client.DataSnapshot)data.child("neighbour1").getValue();
+//                    System.out.println("alaaaaaaa1" + adj[key][1]);
+//                    adj[key][2]=(com.firebase.client.DataSnapshot)data.child("neighbour2").getValue();
+//                    System.out.println("alaaaaaaa2" + adj[key][2]);
+//                    adj[key][3]=(com.firebase.client.DataSnapshot)data.child("neighbour3").getValue();
+//                    System.out.println("alaaaaaaa3" + adj[key][3]);
+//                    adj[key][4]=(com.firebase.client.DataSnapshot)data.child("neighbour4").getValue();
+//                    System.out.println("alaaaaaaa4" +  adj[key][4]);
+//                    adj[key][5]=(com.firebase.client.DataSnapshot)data.child("neighbour5").getValue();
+//                    System.out.println("alaaaaaaa5" + adj[key][5]);
+//                    adj[key][6]=(com.firebase.client.DataSnapshot)data.child("neighbour6").getValue();
+//                    System.out.println("alaaaaaaa6" + adj[key][6]);
+//                    adj[key][7]=(com.firebase.client.DataSnapshot)data.child("neighbour7").getValue();
+//                    System.out.println("alaaaaaaa7" + adj[key][7]);
+//                    adj[key][8]=(com.firebase.client.DataSnapshot)data.child("neighbour8").getValue();
+//                    System.out.println("alaaaaaaa8" + adj[key][8]);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+
+        });
+
+
 
        // com.firebase.client.DataSnapshot check = ref.child("points").
 

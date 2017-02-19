@@ -29,9 +29,6 @@
         <meta-data
             android:name="com.indooratlas.android.sdk.API_SECRET"
             android:value="ZBcjV7cug2uw4XlGZbOY7KUG2eT8nkh1Qac2zHxyG8f1aKakZ+BQRxWU6U9hntuETQ9tVwW2uPsGPTpWiRDu9FdXDZbHpNpeZITRWLk/tjtpI3O8OmAqnnPeFxeJOw==" />
-
-        <activity android:name=".MainActivity" >
-        </activity>
         <activity android:name=".HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" >
+        </activity>
+
     </application>
 
 </manifest>
