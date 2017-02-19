@@ -14,6 +14,10 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.indooratlas.android.sdk.IALocation;
 import com.indooratlas.android.sdk.IALocationListener;
 import com.indooratlas.android.sdk.IALocationManager;
@@ -72,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         tvHeading.setText("Dest: " +  intent.getStringExtra("dest"));
         dest = intent.getStringExtra("dest");
 
-       // double dest_id=(double)points.
+       // double dest_id=(double)points.\
+
 
 
         // initialize your android device sensor capabilities
@@ -80,6 +85,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //   Firebase.setandroid
         Firebase.setAndroidContext(this);
         Firebase ref = new Firebase("https://map1-ab0da.firebaseio.com/points");
+
+        Query queryRef = ref.orderByChild("name").equalTo(dest);
+        System.out.println("YA RAB RABNA YHDEK W TTB3 AY 7AGA "+queryRef);
+        queryRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                    System.out.println(child.getKey());
+                }
+
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+
+        });
+
+
         Firebase ref1 = new Firebase("https://map1-ab0da.firebaseio.com/adjecent matrix");
 
         ref1.addValueEventListener(new com.firebase.client.ValueEventListener(){
@@ -148,6 +172,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
+
+
 
     }
 
